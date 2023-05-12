@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate Your Maths</title>
+
+    <style>
+        body{
+            background-color: orange;
+        }
+        .calculator {
+            width: 373px;
+            background-color: blue;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        input:not(.text) {
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            margin: 10px;
+            font-size: 24px;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+        }
+
+        input:hover:not(.text, .op) {
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .op {
+            color: blueviolet;
+            background-color: greenyellow;
+        }
+        .n{
+            background-color: #e19393;
+        }
+
+        .op:hover {
+            background-color: black;
+            color: #c7a2ee;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .output .text {
+            width: 93%;
+            height: 70px;
+            padding: 0 20px 0 0;
+            background-color: #f5f5c1;
+            margin-bottom: 15px;
+            text-align: right;
+            font-size: 30px;
+            border-radius: 20px;
+        }
+
+        .calculator .equal {
+            width: 155px;
+            border-radius: 20%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+  
+  <div class="output">
+    <input type="text" class="text" value="" placeholder="0">
+  </div>
+  
+  <div>
+      <input type="button" value="AC" class="op AC">
+      <input type="button" value="DEL" class="op DEL">
+      <input type="button" value="%" class="op val">
+      <input type="button" value="/" class="op val">
+  </div>
+
+    <div>
+        <input type="button" value="7" class="n val">
+        <input type="button" value="8" class="n val">
+        <input type="button" value="9" class="n val">
+        <input type="button" value="*" class="op val">
+    </div>
+
+    <div>
+        <input type="button" value="4" class="n val">
+        <input type="button" value="5" class="n val">
+        <input type="button" value="6" class="n val">
+        <input type="button" value="-" class="op val">
+    </div>
+
+    <div>
+        <input type="button" value="1" class="n val">
+        <input type="button" value="2" class="n val">
+        <input type="button" value="3" class="n val">
+        <input type="button" value="+" class="op val">
+    </div>
+
+    <div>
+        <input type="button" value="." class="op val">
+        <input type="button" value="0" class="n val">
+        <input type="button" value="=" class="equal op">
+    </div>
+
+</div>
+<script>
+    const outputEl = document.querySelector(".text");
+    const valEl = document.querySelectorAll(".val");
+    const ClearEl = document.querySelector(".AC");
+    const deleteEl = document.querySelector(".DEL");
+    const equalEl = document.querySelector(".equal");
+
+    valEl.forEach((val)=>{
+        val.addEventListener("click",()=>{
+            outputEl.value+=val.value;
+        })
+    })
+
+    ClearEl.addEventListener("click",()=>{
+        outputEl.value = "";
+    })
+
+    deleteEl.addEventListener("click",()=>{
+        outputEl.value = outputEl.value.slice(0,-1);
+    })
+
+    /*equalEl.addEventListener("click",()=>{
+        try{
+            outputEl.value = eval(outputEl.value);
+        }catch (e){
+            alert(e);
+        }
+    })*/
+    //work for enter key
+    /*outputEl.addEventListener("keydown", (event) => {
+        if (event.keyCode === 13) {
+            try {
+                outputEl.value = eval(outputEl.value);
+            } catch (e) {
+                alert(e);
+            }
+        }
+    });*/
+
+    // also work for both enter key and equal button click
+    function calculate() {
+        try {
+            outputEl.value = eval(outputEl.value);
+        } catch (e) {
+            alert(e);
+        }
+    }
+
+    equalEl.addEventListener("click", calculate);
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            calculate();
+        }
+    });
+
+</script>
+</body>
+</html>
