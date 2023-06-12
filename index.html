@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Calculate Your Maths</title>
 
+
     <style>
         body{
-            background-color: orange;
+            background-color: darkred;
         }
         .calculator {
             width: 373px;
@@ -161,6 +162,12 @@
         if (event.key === "Enter") {
             calculate();
         }
+    });
+    // When starting the web page, the cursor is set to the text field
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const textField = document.querySelector('.text');
+
+        textField.focus();
     });
 
 </script>
